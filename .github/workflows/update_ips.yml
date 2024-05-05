@@ -16,9 +16,9 @@ jobs:
       - name: Get IPS
         run: |
           echo Update ip.txt
-          curl https://www.baipiao.eu.org/cloudflare/ips-v4 -o ${GITHUB_WORKSPACE}/ip.txt
+          curl -s https://www.baipiao.eu.org/cloudflare/ips-v4 -o ${GITHUB_WORKSPACE}/ip.txt
           echo Update ipv6.txt
-          curl https://www.baipiao.eu.org/cloudflare/ips-v6 -o ${GITHUB_WORKSPACE}/ipv6.txt
+          curl -s https://www.baipiao.eu.org/cloudflare/ips-v6 -o ${GITHUB_WORKSPACE}/ipv6.txt
       - name: Apply ips changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
