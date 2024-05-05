@@ -15,8 +15,8 @@ jobs:
         uses: actions/checkout@main
       - name: Get IPS
         run: |
-          curl -s https://www.baipiao.eu.org/cloudflare/ips-v4 -o ip.txt
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+          curl -s https://www.baipiao.eu.org/cloudflare/ips-v4 -o ${GITHUB_WORKSPACE}/ip.txt
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit-message: update ip.txt
+         commit_message: Apply ip.txt changes
