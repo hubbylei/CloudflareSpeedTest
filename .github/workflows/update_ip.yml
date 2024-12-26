@@ -9,7 +9,7 @@ env:
 
 jobs:
   Update:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -19,10 +19,14 @@ jobs:
           curl -s https://www.baipiao.eu.org/cloudflare/ips-v4 -o ${GITHUB_WORKSPACE}/ip.txt
           echo Get ipv6.txt
           curl -s https://www.baipiao.eu.org/cloudflare/ips-v6 -o ${GITHUB_WORKSPACE}/ipv6.txt
+      - name: Creat Message
+        id: msg
+        run: |
+            echo "commit_message=Update $(date +"%Y-%m-%d %H:%M:%S")" >> "$GITHUB_OUTPUT"
       - name: Apply IP Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-         commit_message: Apply IP Changes
+         commit_message: ${{ steps.msg.outputs.commit_message }}
       - name: Delete workflow runs
         uses: Mattraks/delete-workflow-runs@main
         with:
